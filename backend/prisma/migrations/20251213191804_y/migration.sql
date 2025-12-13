@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE "institutions" ALTER COLUMN "id" DROP DEFAULT,
+ALTER COLUMN "name" DROP DEFAULT,
+ALTER COLUMN "domain" DROP DEFAULT,
+ALTER COLUMN "updatedAt" DROP DEFAULT;
+
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "institutionId" DROP DEFAULT;
