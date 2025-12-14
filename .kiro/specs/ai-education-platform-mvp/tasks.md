@@ -1,197 +1,324 @@
 # Implementation Plan - AI-Powered Education Platform (Hackathon MVP)
 
-## 🎮 15 Core Tasks (Hackathon MVP)
+## 🎮 8 Core Tasks (Local-First Hackathon)
 
-### Phase 1: AWS Setup (1 hour)
+### Phase 1: Backend Core (2 hours)
 
-- [ ] 1. Set up AWS infrastructure
-  - Create AWS account and configure IAM roles
-  - Set up RDS PostgreSQL (managed database)
-  - Set up ElastiCache Redis (managed cache)
-  - Set up S3 bucket for file storage
-  - Configure CloudFront CDN
-  - Set up CloudWatch for monitoring
-  - Create Lambda execution role
-  - _Deliverable: AWS console ready, all services connected_
+- [x] 1. Database & Backend Setup
+  - ✅ PostgreSQL schema with Prisma (18 models)
+  - ✅ Redis cache layer
+  - ✅ Express server with health checks
+  - _Deliverable: Backend running locally, DB seeded_
   - _Requirements: All_
 
-- [x] 2. Set up frontend and backend scaffolding
-  - Create React app with AWS Amplify
-  - Set up Node.js Lambda functions
-  - Configure API Gateway
-  - Set up environment variables
-  - Create database schema (Prisma)
-  - Set up authentication (Cognito)
-  - _Deliverable: Frontend and backend running locally_
-  - _Requirements: All_
+- [ ] 2. GitHub OAuth & Activity Sync
+  - Implement GitHub OAuth login
+  - Create GitHub webhook for push events
+  - Sync commits and PR data to database
+  - Calculate code quality metrics
+  - _Deliverable: GitHub activity syncing to local DB_
+  - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
-### Phase 2: GitHub Integration (1 hour)
+### Phase 2: AI Feedback Engine (3 hours) ← **THE HERO**
 
-- [ ] 3. Implement GitHub OAuth and activity sync
-  - Create GitHub OAuth app
-  - Implement GitHub login flow
-  - Set up GitHub webhook for push events
-  - Create Lambda function to process GitHub events
-  - Store commits and PR data in RDS
-  - Implement activity sync scheduler
-  - _Deliverable: GitHub activity syncing to database_
-  - _Requirements: 5.1, 5.2_
-
-- [ ] 4. Implement code quality analysis
-  - Create Lambda function for code analysis
-  - Integrate with AWS CodeBuild for metrics
-  - Calculate code quality score (complexity, style, coverage)
-  - Store metrics in RDS
-  - Create learning pattern detection
-  - _Deliverable: Code quality metrics calculated and stored_
-  - _Requirements: 5.2, 5.3, 5.4_
-
-### Phase 3: AI Feedback Engine (2 hours) ← **THE HERO**
-
-- [ ] 5. Set up AWS Bedrock integration
-  - Configure AWS Bedrock with Claude model
-  - Create Lambda function for AI analysis
-  - Set up prompt engineering for feedback generation
+- [ ] 3. Ollama LLM Integration (Local)
+  - Set up Ollama with Mistral 7B locally
+  - Create feedback generation pipeline
   - Implement context awareness (student history, skill level)
   - Add confidence scoring to responses
-  - _Deliverable: Bedrock API working, generating feedback_
-  - _Requirements: 7.1, 7.2_
-
-- [ ] 6. Implement AI feedback generation
-  - Create feedback generation pipeline
-  - Analyze student code + GitHub history
-  - Generate personalized feedback using Bedrock
-  - Add explanations for why feedback is given
-  - Implement feedback ranking (most important first)
-  - Store feedback in RDS with metadata
-  - _Deliverable: AI generating feedback for submissions_
+  - _Deliverable: Local LLM generating personalized feedback_
   - _Requirements: 7.1, 7.2, 7.3, 7.4_
 
-- [ ] 6.1 Write property tests for feedback persistence
+- [ ] 3.1 Write property tests for feedback persistence
   - **Property 6: Feedback Persistence**
   - **Validates: Requirements 7.2, 7.4**
 
-- [ ] 7. Implement AI learning from teacher feedback
-  - Create feedback comparison logic
-  - Track teacher edits to AI suggestions
-  - Store feedback patterns in DynamoDB
-  - Create feedback improvement metrics
-  - Implement feedback quality scoring
-  - _Deliverable: AI learning from teacher corrections_
-  - _Requirements: 7.1, 7.2_
-
-### Phase 4: Risk Prediction (1 hour)
-
-- [ ] 8. Build risk prediction model
-  - Create SageMaker notebook for model training
-  - Train model on GitHub activity patterns
-  - Implement feature engineering (commit frequency, code quality, engagement)
-  - Deploy model as SageMaker endpoint
-  - Create real-time prediction API
-  - _Deliverable: Risk prediction model deployed_
-  - _Requirements: 6.1_
-
-- [ ] 8.1 Write property tests for risk score monotonicity
-  - **Property 5: Risk Score Monotonicity**
-  - **Validates: Requirements 6.1**
-
-- [ ] 9. Implement risk scoring and alerts
-  - Create Lambda function for risk calculation
-  - Implement risk level classification (low, medium, high)
-  - Create alert system for high-risk students
-  - Store risk scores in RDS with timestamps
-  - Implement risk trend analysis
+- [ ] 4. Risk Prediction Model (Simple ML)
+  - Create simple risk scoring algorithm
+  - Analyze GitHub activity patterns
+  - Classify risk levels (low, medium, high)
+  - Store predictions in database
   - _Deliverable: Risk scores calculated and stored_
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-### Phase 5: Dashboards (2 hours)
+- [ ] 4.1 Write property tests for risk score monotonicity
+  - **Property 5: Risk Score Monotonicity**
+  - **Validates: Requirements 6.1**
 
-- [ ] 10. Build student dashboard
-  - Create React component for student dashboard
+### Phase 3: Dashboards (3 hours)
+
+- [ ] 5. Student & Teacher Dashboards
+  - Create React components for student dashboard
   - Display AI feedback with confidence scores
   - Show risk assessment with explanation
-  - Display personalized recommendations
-  - Show progress metrics
-  - Implement real-time updates with WebSocket
-  - _Deliverable: Student dashboard fully functional_
-  - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - Build teacher dashboard with at-risk students
+  - Show AI-suggested feedback for review
+  - Implement dark/light mode
+  - _Deliverable: Both dashboards fully functional locally_
+  - _Requirements: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 10.1, 10.2_
 
-- [ ] 10.1 Write property tests for student dashboard
+- [ ] 5.1 Write property tests for dashboard consistency
   - **Property 1: Points Award Consistency**
   - **Validates: Requirements 4.1**
 
-- [ ] 11. Build teacher dashboard
-  - Create React component for teacher dashboard
-  - Display at-risk student list with risk scores
-  - Show AI-suggested feedback for review
-  - Implement one-click approval/edit interface
-  - Display class performance metrics
-  - Show feedback quality metrics
-  - _Deliverable: Teacher dashboard fully functional_
-  - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
-
-- [ ] 11.1 Write property tests for leaderboard
-  - **Property 3: Leaderboard Ordering**
-  - **Validates: Requirements 4.4**
-
-### Phase 6: Admin Dashboard (1 hour)
-
-- [ ] 12. Build admin dashboard
-  - Create React component for admin dashboard
-  - Display institution health score
-  - Show AI impact metrics (feedback quality, risk detection accuracy)
-  - Display teacher effectiveness metrics
-  - Show real-time system metrics from CloudWatch
-  - Implement data export functionality
-  - _Deliverable: Admin dashboard fully functional_
-  - _Requirements: 3.1, 3.2, 3.3, 3.4_
-
-### Phase 7: Polish & Animations (1 hour)
-
-- [ ] 13. Implement UI polish and animations
-  - Add smooth transitions (0.4-0.5s ease-in-out)
-  - Implement card hover effects (lift, scale, glow)
-  - Add loading animations
-  - Implement success/error notifications
-  - Add glassmorphism styling
-  - Test responsive design (mobile, tablet, desktop)
-  - _Deliverable: Stunning, polished UI_
-  - _Requirements: 9.1, 9.2, 9.3, 9.4_
-
-- [ ] 13.1 Write property tests for responsive layout
-  - **Property 9: Responsive Layout Consistency**
-  - **Validates: Requirements 9.1**
-
-- [ ] 14. Implement dark/light mode
-  - Create theme context
-  - Implement theme toggle
-  - Apply theme to all components
-  - Store theme preference in localStorage
-  - Test theme consistency
-  - _Deliverable: Dark/light mode working_
-  - _Requirements: 10.1, 10.2, 10.3, 10.4_
-
-- [ ] 14.1 Write property tests for theme persistence
+- [ ] 5.2 Write property tests for theme persistence
   - **Property 10: Theme Persistence**
   - **Validates: Requirements 10.2, 10.3**
 
-### Phase 8: Demo & Metrics (1 hour)
+### Phase 4: Gamification & Polish (1.5 hours)
 
-- [ ] 15. Create demo scenario and metrics dashboard
+- [ ] 6. Gamification System
+  - Implement points calculation
+  - Create badge unlock logic
+  - Build leaderboard ranking
+  - Add animations and transitions
+  - _Deliverable: Gamification fully working_
+  - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
+
+- [ ] 6.1 Write property tests for leaderboard ordering
+  - **Property 3: Leaderboard Ordering**
+  - **Validates: Requirements 4.4**
+
+### Phase 5: Grievance System (1 hour)
+
+- [ ] 7. Grievance Management
+  - Create grievance filing form
+  - Implement grievance routing logic
+  - Build grievance resolution workflow
+  - Create audit trail for compliance
+  - _Deliverable: Grievance system fully functional_
+  - _Requirements: 8.1, 8.2, 8.3, 8.4, 17.1, 17.2, 17.3, 17.4_
+
+- [ ] 7.1 Write property tests for grievance routing
+  - **Property 7: Grievance Routing Correctness**
+  - **Validates: Requirements 8.2**
+
+### Phase 6: Demo & Testing (0.5 hours)
+
+- [ ] 8. Demo Scenario & Testing
   - Set up demo data (students, teachers, submissions)
   - Create demo script (5 minutes)
-  - Build metrics dashboard showing:
-    - AI feedback quality improvement (before/after)
-    - Risk detection accuracy
-    - Student satisfaction improvement
-    - Intervention success rate
-  - Create CloudWatch dashboard for live metrics
-  - Prepare presentation slides
-  - _Deliverable: Live demo ready, metrics visible_
+  - Run all property tests (100 iterations each)
+  - Manual testing of all workflows
+  - _Deliverable: Live demo ready, all tests passing_
   - _Requirements: All_
 
-- [ ] 15.1 Checkpoint - Final verification
+- [ ] 8.1 Checkpoint - Final Verification
   - Ensure all tests pass
-  - Verify all features work as designed
-  - Ask the user if questions arise
+  - Verify all features work end-to-end
+  - Demo runs without errors
   - _Requirements: All_
+
+---
+
+## 📊 Timeline (8 Hours Total)
+
+| Hour | Phase | Tasks | Deliverable |
+|------|-------|-------|-------------|
+| 0-2 | Backend | 1-2 | GitHub sync working locally |
+| 2-5 | AI Engine | 3-4 | Ollama + Risk prediction |
+| 5-8 | Dashboards | 5-6 | Student/teacher dashboards + gamification |
+| 8-9 | Grievance | 7 | Grievance system |
+| 9-9.5 | Demo | 8 | Live demo + tests |
+
+---
+
+## 🏗️ Tech Stack (Local-First)
+
+### Frontend
+```
+React 18 + TypeScript
+Tailwind CSS
+Vite (build tool)
+Dark/Light mode
+```
+
+### Backend
+```
+Node.js + Express
+PostgreSQL (local)
+Redis (local)
+Prisma ORM
+```
+
+### AI/ML
+```
+Ollama (local LLM)
+Mistral 7B (free, open-source)
+Simple ML algorithms
+```
+
+### Testing
+```
+Jest (unit tests)
+fast-check (property tests)
+```
+
+### No Cloud Services Needed
+```
+❌ AWS (use local instead)
+❌ CloudWatch (use local logging)
+❌ Lambda (use Express)
+❌ RDS (use local PostgreSQL)
+❌ ElastiCache (use local Redis)
+```
+
+---
+
+## 🎬 Demo Script (5 Minutes)
+
+### Setup (30 seconds)
+```
+"Teachers can't give real-time feedback to 100+ students.
+Our solution: AI-powered feedback loop using local Ollama.
+Watch how it works."
+```
+
+### Demo Flow (4 minutes)
+
+**1. Student Submits Code (1 minute)**
+- Show GitHub push
+- Show code in dashboard
+- Show "AI analyzing..." animation
+
+**2. AI Generates Feedback (1.5 minutes)**
+- Show Ollama analyzing code
+- Show AI-generated feedback appearing
+- Show confidence score
+- Show explanation
+- **Wow moment**: "AI understood the student's skill level"
+
+**3. Teacher Reviews (1 minute)**
+- Show teacher dashboard
+- Show AI-suggested feedback
+- Teacher approves feedback
+- Show feedback sent to student
+- **Wow moment**: "Teacher can review 100 submissions in 10 minutes"
+
+**4. Metrics (30 seconds)**
+- Show risk detection accuracy
+- Show student satisfaction
+- Show intervention time improvement
+
+### Closing (30 seconds)
+```
+"This is scalable to 10,000+ students.
+Built locally, ready for cloud.
+GenAI is the core differentiator."
+```
+
+---
+
+## 👥 Team Breakdown (4 People)
+
+**Person 1: Backend Lead**
+- Task 1: Database setup ✅
+- Task 2: GitHub integration
+- Task 4: Risk prediction
+- **Total: 2.5 hours**
+
+**Person 2: AI/ML Lead**
+- Task 3: Ollama integration
+- Task 3.1: Feedback tests
+- Task 4.1: Risk tests
+- **Total: 2 hours**
+
+**Person 3: Frontend Lead**
+- Task 5: Dashboards
+- Task 5.1, 5.2: Dashboard tests
+- Task 6: Gamification
+- **Total: 2.5 hours**
+
+**Person 4: Grievance & Demo**
+- Task 7: Grievance system
+- Task 7.1: Grievance tests
+- Task 8: Demo & testing
+- **Total: 1.5 hours**
+
+---
+
+## ✅ Winning Checklist
+
+### Innovation
+- [ ] AI feedback loop is novel
+- [ ] GenAI learns from teacher feedback
+- [ ] Real-time feedback
+- [ ] Explainable AI
+
+### Functionality
+- [ ] All 8 tasks completed
+- [ ] All tests passing
+- [ ] Live demo works
+- [ ] No crashes
+
+### Code Quality
+- [ ] Clean code
+- [ ] Well-commented
+- [ ] Property tests passing
+- [ ] All features end-to-end
+
+### Demo
+- [ ] 5-minute script smooth
+- [ ] Problem → Solution clear
+- [ ] Metrics visible
+- [ ] Team can explain everything
+
+---
+
+## 🚀 Success Metrics
+
+**You win if:**
+- ✅ All 8 tasks completed
+- ✅ Live demo works without errors
+- ✅ All property tests pass
+- ✅ Code is clean and documented
+- ✅ Team can answer all questions
+
+**You don't win if:**
+- ❌ Demo crashes
+- ❌ Features incomplete
+- ❌ Tests failing
+- ❌ Code is messy
+
+---
+
+## 💡 Pro Tips
+
+1. **Start with Task 3 (Ollama)** - Get AI working first
+2. **Use local services** - No cloud setup needed
+3. **Test early** - Run property tests constantly
+4. **Keep it simple** - Focus on core features
+5. **Practice demo** - 5 minutes should be smooth
+6. **Have backup** - If live demo fails, show video
+7. **Document as you go** - Makes demo easier
+8. **Have fun** - Judges can tell if you're enjoying it
+
+---
+
+## 📋 Hour-by-Hour Breakdown
+
+```
+Hour 1-2: Task 1-2 (Backend + GitHub)
+Hour 2-3: Task 3 (Ollama setup)
+Hour 3-4: Task 4 (Risk prediction)
+Hour 4-5: Task 5 (Dashboards)
+Hour 5-6: Task 6 (Gamification)
+Hour 6-7: Task 7 (Grievance)
+Hour 7-8: Task 8 (Demo + Testing)
+Hour 8-9: Buffer + Final polish
+```
+
+---
+
+## 🎯 Remember
+
+**This is about building the most impressive demo in 8 hours.**
+
+Focus on:
+1. **AI feedback loop** (the hero)
+2. **Local development** (no cloud complexity)
+3. **Property tests** (prove correctness)
+4. **Polish** (looks matter)
+5. **Demo** (make them say wow)
+
+**You've got this! 🚀**
