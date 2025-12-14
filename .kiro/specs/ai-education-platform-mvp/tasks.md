@@ -45,9 +45,30 @@
   - **Property 5: Risk Score Monotonicity**
   - **Validates: Requirements 6.1**
 
-### Phase 3: Dashboards (3 hours)
+### Phase 3: UI/UX Foundation (1 hour)
 
-- [ ] 5. Student & Teacher Dashboards
+- [ ] 5. Implement UI/UX Design System
+  - Set up Tailwind CSS with custom theme (cyan, magenta, electric blue)
+  - Create reusable components (Card, Button, Input, Badge, Toast)
+  - Implement glassmorphism styling with backdrop blur
+  - Add smooth animations (0.4-0.5s ease-in-out)
+  - Implement card hover effects (lift, scale, glow)
+  - Set up dark/light mode toggle with persistence
+  - Create responsive grid system (4-col, 3-col, 2-col, 1-col)
+  - _Deliverable: Complete design system ready for dashboards_
+  - _Requirements: 9.1, 9.2, 9.3, 9.4, 10.1, 10.2, 10.3, 10.4_
+
+- [ ] 5.1 Write property tests for responsive layout
+  - **Property 9: Responsive Layout Consistency**
+  - **Validates: Requirements 9.1**
+
+- [ ] 5.2 Write property tests for theme persistence
+  - **Property 10: Theme Persistence**
+  - **Validates: Requirements 10.2, 10.3**
+
+### Phase 4: Dashboards (3 hours)
+
+- [ ] 6. Student & Teacher Dashboards
   - Create React components for student dashboard
   - Display AI feedback with confidence scores
   - Show risk assessment with explanation
@@ -57,17 +78,13 @@
   - _Deliverable: Both dashboards fully functional locally_
   - _Requirements: 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 10.1, 10.2_
 
-- [ ] 5.1 Write property tests for dashboard consistency
+- [ ] 6.1 Write property tests for dashboard consistency
   - **Property 1: Points Award Consistency**
   - **Validates: Requirements 4.1**
 
-- [ ] 5.2 Write property tests for theme persistence
-  - **Property 10: Theme Persistence**
-  - **Validates: Requirements 10.2, 10.3**
+### Phase 5: Gamification & Polish (1.5 hours)
 
-### Phase 4: Gamification & Polish (1.5 hours)
-
-- [ ] 6. Gamification System
+- [ ] 7. Gamification System
   - Implement points calculation
   - Create badge unlock logic
   - Build leaderboard ranking
@@ -75,13 +92,13 @@
   - _Deliverable: Gamification fully working_
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 6.1 Write property tests for leaderboard ordering
+- [ ] 7.1 Write property tests for leaderboard ordering
   - **Property 3: Leaderboard Ordering**
   - **Validates: Requirements 4.4**
 
-### Phase 5: Feedback & Contact System (1 hour)
+### Phase 6: Feedback & Contact System (1 hour)
 
-- [ ] 7. Feedback & Contact Management
+- [ ] 8. Feedback & Contact Management
   - Create feedback/contact form
   - Implement routing to appropriate mentor/teacher
   - Build response workflow
@@ -89,13 +106,13 @@
   - _Deliverable: Feedback & contact system fully functional_
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 17.1, 17.2, 17.3, 17.4_
 
-- [ ] 7.1 Write property tests for feedback routing
+- [ ] 8.1 Write property tests for feedback routing
   - **Property 7: Feedback Routing Correctness**
   - **Validates: Requirements 8.2**
 
-### Phase 6: Demo & Testing (0.5 hours)
+### Phase 7: Demo & Testing (0.5 hours)
 
-- [ ] 8. Demo Scenario & Testing
+- [ ] 9. Demo Scenario & Testing
   - Set up demo data (students, teachers, submissions)
   - Create demo script (5 minutes)
   - Run all property tests (100 iterations each)
@@ -103,7 +120,7 @@
   - _Deliverable: Live demo ready, all tests passing_
   - _Requirements: All_
 
-- [ ] 8.1 Checkpoint - Final Verification
+- [ ] 9.1 Checkpoint - Final Verification
   - Ensure all tests pass
   - Verify all features work end-to-end
   - Demo runs without errors
@@ -111,15 +128,16 @@
 
 ---
 
-## 📊 Timeline (8 Hours Total)
+## 📊 Timeline (9 Hours Total)
 
 | Hour | Phase | Tasks | Deliverable |
 |------|-------|-------|-------------|
 | 0-2 | Backend | 1-2 | GitHub sync working locally |
-| 2-5 | AI Engine | 3-4 | Ollama + Risk prediction |
-| 5-8 | Dashboards | 5-6 | Student/teacher dashboards + gamification |
-| 8-9 | Grievance | 7 | Grievance system |
-| 9-9.5 | Demo | 8 | Live demo + tests |
+| 2-4 | AI Engine | 3-4 | Ollama + Risk prediction |
+| 4-5 | UI/UX | 5 | Design system + components |
+| 5-8 | Dashboards | 6 | Student/teacher dashboards + gamification |
+| 8-9 | Feedback | 8 | Feedback & contact system |
+| 9-9.5 | Demo | 9 | Live demo + tests |
 
 ---
 
@@ -224,15 +242,18 @@ GenAI is the core differentiator."
 - **Total: 2 hours**
 
 **Person 3: Frontend Lead**
-- Task 5: Dashboards
-- Task 5.1, 5.2: Dashboard tests
-- Task 6: Gamification
-- **Total: 2.5 hours**
+- Task 5: UI/UX Design System
+- Task 5.1, 5.2: UI tests
+- Task 6: Dashboards
+- Task 6.1: Dashboard tests
+- Task 7: Gamification
+- Task 7.1: Leaderboard tests
+- **Total: 3.5 hours**
 
-**Person 4: Grievance & Demo**
-- Task 7: Grievance system
-- Task 7.1: Grievance tests
-- Task 8: Demo & testing
+**Person 4: Feedback & Demo**
+- Task 8: Feedback & Contact system
+- Task 8.1: Feedback tests
+- Task 9: Demo & testing
 - **Total: 1.5 hours**
 
 ---
@@ -301,11 +322,12 @@ GenAI is the core differentiator."
 Hour 1-2: Task 1-2 (Backend + GitHub)
 Hour 2-3: Task 3 (Ollama setup)
 Hour 3-4: Task 4 (Risk prediction)
-Hour 4-5: Task 5 (Dashboards)
-Hour 5-6: Task 6 (Gamification)
-Hour 6-7: Task 7 (Grievance)
-Hour 7-8: Task 8 (Demo + Testing)
-Hour 8-9: Buffer + Final polish
+Hour 4-5: Task 5 (UI/UX Design System)
+Hour 5-6: Task 6 (Dashboards)
+Hour 6-7: Task 7 (Gamification)
+Hour 7-8: Task 8 (Feedback & Contact)
+Hour 8-9: Task 9 (Demo + Testing)
+Hour 9-9.5: Buffer + Final polish
 ```
 
 ---
