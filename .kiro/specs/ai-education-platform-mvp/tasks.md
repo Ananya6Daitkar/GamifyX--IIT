@@ -79,18 +79,18 @@
   - **Property 3: Leaderboard Ordering**
   - **Validates: Requirements 4.4**
 
-### Phase 5: Grievance System (1 hour)
+### Phase 5: Feedback & Contact System (1 hour)
 
-- [ ] 7. Grievance Management
-  - Create grievance filing form
-  - Implement grievance routing logic
-  - Build grievance resolution workflow
-  - Create audit trail for compliance
-  - _Deliverable: Grievance system fully functional_
+- [ ] 7. Feedback & Contact Management
+  - Create feedback/contact form
+  - Implement routing to appropriate mentor/teacher
+  - Build response workflow
+  - Create audit trail for tracking
+  - _Deliverable: Feedback & contact system fully functional_
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 17.1, 17.2, 17.3, 17.4_
 
-- [ ] 7.1 Write property tests for grievance routing
-  - **Property 7: Grievance Routing Correctness**
+- [ ] 7.1 Write property tests for feedback routing
+  - **Property 7: Feedback Routing Correctness**
   - **Validates: Requirements 8.2**
 
 ### Phase 6: Demo & Testing (0.5 hours)

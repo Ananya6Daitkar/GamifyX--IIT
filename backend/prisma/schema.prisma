@@ -31,7 +31,7 @@ model User {
   student         Student?
   teacherClasses  TeacherClass[]
   feedbackGiven   Feedback[] @relation("TeacherFeedback")
-  grievancesAssigned Grievance[] @relation("AssignedTo")
+  feedbackAssigned StudentFeedback[] @relation("AssignedTo")
   gamificationEvents GamificationEvent[]
   chatMessages    ChatMessage[]
   auditLogs       AuditLog[]
@@ -74,7 +74,7 @@ model Student {
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   submissions       Submission[]
   feedbackReceived  Feedback[] @relation("StudentFeedback")
-  grievances        Grievance[] @relation("StudentGrievance")
+  contactFeedback   StudentFeedback[] @relation("StudentFeedback")
   badges            StudentBadge[]
   riskPredictions   RiskPrediction[]
   chatMessages      ChatMessage[]
@@ -176,41 +176,41 @@ model Feedback {
 }
 
 // ============================================================================
-// Grievance Models
+// Feedback & Contact Models
 // ============================================================================
 
-model Grievance {
+model StudentFeedback {
   id            String        @id @default(cuid())
   studentId     String
-  category      GrievanceCategory
-  severity      GrievanceSeverity
-  description   String
-  status        GrievanceStatus @default(OPEN)
+  category      FeedbackCategory
+  priority      FeedbackPriority
+  message       String
+  status        FeedbackStatus @default(OPEN)
   assignedToId  String?
-  resolution    String?
+  response      String?
   createdAt     DateTime      @default(now())
-  resolvedAt    DateTime?
+  respondedAt   DateTime?
   updatedAt     DateTime      @updatedAt
 
   // Relations
-  student       Student       @relation("StudentGrievance", fields: [studentId], references: [id], onDelete: Cascade)
+  student       Student       @relation("StudentFeedback", fields: [studentId], references: [id], onDelete: Cascade)
   assignedTo    User?         @relation("AssignedTo", fields: [assignedToId], references: [id], onDelete: SetNull)
-  auditTrail    GrievanceAuditLog[]
+  auditTrail    FeedbackAuditLog[]
 
-  @@map("grievances")
+  @@map("student_feedback")
 }
 
-model GrievanceAuditLog {
+model FeedbackAuditLog {
   id          String    @id @default(cuid())
-  grievanceId String
+  feedbackId  String
   action      String
   details     String?
   createdAt   DateTime  @default(now())
 
   // Relations
-  grievance   Grievance @relation(fields: [grievanceId], references: [id], onDelete: Cascade)
+  feedback    StudentFeedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
 
-  @@map("grievance_audit_logs")
+  @@map("feedback_audit_logs")
 }
 
 // ============================================================================
@@ -346,24 +346,23 @@ enum RiskLevel {
   HIGH
 }
 
-enum GrievanceCategory {
-  GRADE
-  FEEDBACK
-  FAIRNESS
+enum FeedbackCategory {
+  QUESTION
+  SUGGESTION
+  HELP_NEEDED
   OTHER
 }
 
-enum GrievanceSeverity {
+enum FeedbackPriority {
   LOW
   MEDIUM
   HIGH
-  CRITICAL
 }
 
-enum GrievanceStatus {
+enum FeedbackStatus {
   OPEN
   IN_PROGRESS
-  RESOLVED
+  RESPONDED
   CLOSED
 }
 

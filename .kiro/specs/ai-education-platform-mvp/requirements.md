@@ -99,16 +99,16 @@ An AI-powered, gamified education platform that monitors student learning throug
 3. WHEN a student receives feedback THEN the system SHALL notify them and display it in their dashboard
 4. WHEN feedback is provided THEN the system SHALL create an audit trail for accountability
 
-### Requirement 8: Grievance System
+### Requirement 8: Feedback & Contact System
 
-**User Story:** As a student, I want to raise concerns about grades or feedback, so that I can seek fair resolution and maintain trust in the system.
+**User Story:** As a student, I want to ask questions and get help from mentors, so that I can get support when I need it.
 
 #### Acceptance Criteria
 
-1. WHEN a student files a grievance THEN the system SHALL classify it by urgency and category
-2. WHEN a grievance is filed THEN the system SHALL route it to the appropriate authority (teacher, mentor, admin)
-3. WHEN a grievance is resolved THEN the system SHALL notify the student and store the resolution
-4. WHEN an admin reviews grievances THEN the system SHALL display them with status, priority, and resolution history
+1. WHEN a student submits feedback or a question THEN the system SHALL classify it by category and priority
+2. WHEN feedback is submitted THEN the system SHALL route it to the appropriate mentor or teacher
+3. WHEN a mentor responds to feedback THEN the system SHALL notify the student and store the response
+4. WHEN a mentor reviews feedback THEN the system SHALL display it with status, priority, and response history
 
 ### Requirement 9: Responsive Design & UI/UX
 

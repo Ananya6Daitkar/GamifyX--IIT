@@ -199,12 +199,12 @@ GET /api/feedback/{student_id}
 POST /api/feedback/ai-suggestions
 ```
 
-#### Grievance Service
+#### Feedback & Contact Service
 ```
-POST /api/grievance/file
-GET /api/grievance/{id}
-POST /api/grievance/{id}/resolve
-GET /api/grievance/list
+POST /api/feedback/submit
+GET /api/feedback/{id}
+POST /api/feedback/{id}/respond
+GET /api/feedback/list
 ```
 
 #### Chatbot Service
@@ -288,19 +288,19 @@ interface Feedback {
 }
 ```
 
-### Grievance Model
+### Feedback & Contact Model
 ```typescript
-interface Grievance {
+interface StudentFeedback {
   id: string;
   student_id: string;
-  category: 'grade' | 'feedback' | 'fairness' | 'other';
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  description: string;
-  status: 'open' | 'in_progress' | 'resolved' | 'closed';
-  assigned_to: string; // teacher_id or admin_id
-  resolution: string;
+  category: 'question' | 'suggestion' | 'help_needed' | 'other';
+  priority: 'low' | 'medium' | 'high';
+  message: string;
+  status: 'open' | 'in_progress' | 'responded' | 'closed';
+  assigned_to: string; // mentor_id or teacher_id
+  response: string;
   created_at: timestamp;
-  resolved_at: timestamp;
+  responded_at: timestamp;
 }
 ```
 
@@ -375,12 +375,12 @@ A property is a characteristic or behavior that should hold true across all vali
 *For any* feedback submitted by a teacher, querying the student's feedback list should include that feedback with identical content and timestamp.
 **Validates: Requirements 7.2, 7.4**
 
-### Property 7: Grievance Routing Correctness
-*For any* grievance filed by a student, it should be routed to the correct authority (teacher for grade/feedback, admin for fairness/other) based on category.
+### Property 7: Feedback Routing Correctness
+*For any* feedback submitted by a student, it should be routed to the correct mentor/teacher based on category.
 **Validates: Requirements 8.2**
 
-### Property 8: Grievance Resolution Audit Trail
-*For any* grievance, the complete history of status changes, assignments, and resolutions should be immutable and queryable.
+### Property 8: Feedback Response Audit Trail
+*For any* feedback, the complete history of status changes, assignments, and responses should be immutable and queryable.
 **Validates: Requirements 8.4, 17.3**
 
 ### Property 9: Responsive Layout Consistency
